@@ -3,7 +3,6 @@
 var mysql = require('mysql')
 
 var pool = mysql.createPool({
-    connectionLimit: 500,
     host: 'localhost',
     user: 'root',
     password: 'password',
@@ -20,9 +19,8 @@ pool.getConnection(function (err, connection) {
         console.log("Database created: cruzhacks2020");
     });
 
-    //table, email as primary key
-    var sql = "CREATE TABLE IF NOT EXISTS hackers (name VARCHAR(255), email VARCHAR(255) PRIMARY KEY)";
-        // , school VARCHAR(255), major VARCHAR(255), age INT)";
+    //table, email as primary key, name cannot be null
+    var sql = "CREATE TABLE IF NOT EXISTS hackers (name VARCHAR(255) NOT NULL, email VARCHAR(255) PRIMARY KEY, school VARCHAR(255), major VARCHAR(255), age INT)";
     connection.query(sql, function (err, result) {
         if (err) throw err;
         console.log("Table created: hackers");
