@@ -31,7 +31,7 @@ app.get('/hackers', (request, response) => {
 app.put('/hackers', (request, response) => {
   db.query('INSERT INTO `hackers` SET ?', request.body, (error, result) => {
     if (error) throw error
-    response.status(201).send(`User added with ID: ${result.insertId}`)
+    response.status(201).send(`User added!`)
   })
 })
 
