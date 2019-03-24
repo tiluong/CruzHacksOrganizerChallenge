@@ -38,5 +38,5 @@ app.put('/hackers', (request, response) => {
 // connects and starts the server
 app.listen(port, function(){
   console.log('Connected to port' + port);
-  hackers.generateData(); // to test curl -X GET
+  // hackers.generateData(); // uncomment to test curl -X GET
 });
