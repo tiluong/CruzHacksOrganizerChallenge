@@ -1,38 +1,31 @@
-var mysql = require('mysql');
+// Establish Connection
+var mysql = require('mysql')
 
-var con = mysql.createConnection({
-    host: "localhost",
-    user: "yourusername",
-    password: "yourpassword"
+var connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: 'password',
+    database: 'cruzhacks2020'
+    // port: 1234
+    // database: 'my_db'
 });
 
-con.connect(function (err) {
-    if (err) throw err;
+connection.connect(function (err) {
+    if (err) throw err; //connection error
     console.log("Connected!");
+
+    //Database
+    connection.query("CREATE DATABASE IF NOT EXISTS cruzhacks2020", function (err, result) {
+        if (err) throw err;
+        console.log("Database created: cruzhacks2020");
+    });
+
+    //table
+    var sql = "CREATE TABLE IF NOT EXISTS hackers (email VARCHAR(255) PRIMARY KEY, name VARCHAR(255), school VARCHAR(255), major VARCHAR(255), age INT)";
+    connection.query(sql, function (err, result) {
+        if (err) throw err;
+        console.log("Table created: hackers");
+    });
 });
-// // Establish Connection
-// var mysql = require('mysql');
-
-// mysql.init('bob', 'secret', 'mysql', 'localhost', 3306);
-
-// var connection = mysql.createConnection({
-//     host: 'localhost',
-//     user: 'bob',
-//     password: 'secret'
-// });
-
-// connection.connect(function (err) {
-//     if (err) {
-//         console.error('error connecting: ' + err.stack);
-//         return;
-//     }
-//     // connection.query("CREATE DATABASE cruzhacks2020", function (err, result) {
-//     //     if (err) throw err;
-//     //     console.log("Database created");
-//     // });
-//     // console.log('connected as id ' + connection.threadId);
-// });
-
-// //--------------------
-
-// connection.end();
+    
+// connection.end()
